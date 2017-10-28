@@ -17,6 +17,6 @@
 @interface NSArray (Sorting)
 
 - (NSArray<id<Measurable>> *)mergeSortedArray;
-//- (NSArray<id<Measurable>> *)quickSortedArray;
+- (NSArray<id<Measurable>> *)quickSortedArray;
 
 @end

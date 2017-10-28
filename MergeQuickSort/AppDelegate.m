@@ -7,31 +7,10 @@
 //
 
 #import "AppDelegate.h"
-#import "NSArray+Sorting.h"
-
-@interface NSNumber (Measure) <Measurable>
-
-@end
-
-@implementation NSNumber (Measure)
-
-- (NSInteger)measure
-{
-    return self.integerValue;
-}
-
-@end
-
-@interface AppDelegate ()
-
-@end
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    NSArray <NSNumber *> *arr = @[@101,@201,@301,@121,@11,@123,@21,@14,@32,@76,@89,@987,@65];
-    NSArray <NSNumber *> *sortedArray = [arr mergeSortedArray];
     // Override point for customization after application launch.
     return YES;
 }

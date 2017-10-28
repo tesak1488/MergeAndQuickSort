@@ -40,9 +40,51 @@ NSArray<id<Measurable>> *mergeArrays(NSArray <id<Measurable>> *leftArray, NSArra
     return [result copy];
 }
 
-//- (NSArray<id<Measurable>> *)quickSortedArray
-//{
-//
-//}
+- (NSArray<id<Measurable>> *)quickSortedArray
+{
+    if (self.count <= 1) {
+        return self;
+    } else {
+        NSInteger pivot = [self[arc4random() % self.count] measure];
+        NSMutableArray *lessThenPivot = [NSMutableArray new];
+        NSMutableArray *greaterThenPivot = [NSMutableArray new];
+        for (id<Measurable> currentValue in self) {
+            NSMutableArray *arrayToAddObject = [currentValue measure] < pivot ? lessThenPivot : greaterThenPivot;
+            [arrayToAddObject addObject:currentValue];
+        }
+        return [[lessThenPivot quickSortedArray] arrayByAddingObjectsFromArray:[greaterThenPivot quickSortedArray]];
+    }
+}
+
+
+-(NSArray *)quickSort:(NSMutableArray *)unsortedDataArray
+{
+    
+    NSMutableArray *lessArray = [[NSMutableArray alloc] init];
+    NSMutableArray *greaterArray =[[NSMutableArray alloc] init];
+    if ([unsortedDataArray count] <1)
+    {
+        return nil;
+    }
+    int randomPivotPoint = arc4random() % [unsortedDataArray count];
+    NSNumber *pivotValue = [unsortedDataArray objectAtIndex:randomPivotPoint];
+    [unsortedDataArray removeObjectAtIndex:randomPivotPoint];
+    for (NSNumber *num in unsortedDataArray)
+    {
+        if (num < pivotValue)
+        {
+            [lessArray addObject:num];
+        }
+        else
+        {
+            [greaterArray addObject:num];
+        }
+    }
+    NSMutableArray *sortedArray = [[NSMutableArray alloc] init];
+    [sortedArray addObjectsFromArray:[self quickSort:lessArray]];
+    [sortedArray addObject:pivotValue];
+    [sortedArray addObjectsFromArray:[self quickSort:greaterArray]];
+    return sortedArray;
+}
 
 @end
